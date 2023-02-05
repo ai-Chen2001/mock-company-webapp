@@ -7,12 +7,14 @@ pipeline {
        stages {
            stage('build') {
                steps {
-                   echo './gradlew assemble'
+                   sh './gradlew assemble'
+                   echo 'building application'
                }
            }
            stage('test') {
                steps {
-                  echo './gradlew test'
+                  sh './gradlew test'
+                  echo 'test application'
                }
            }
        }
