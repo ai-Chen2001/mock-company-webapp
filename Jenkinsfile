@@ -7,14 +7,23 @@ pipeline {
        stages {
            stage('build') {
                steps {
-                   sh './gradlew assemble'
-                   echo 'building application'
-               }
+                  try {
+                      sh './gradlew assemble'
+                  }
+                  catch (exc) {
+                      echo 'build failed!'
+                      throw
+                  }
            }
            stage('test') {
                steps {
-                  sh './gradlew test'
-                  echo 'test application'
+                  try {
+                      sh './gradlew test'
+                  }
+                  catch (exc) {
+                      echo 'test failed!'
+                      throw
+                  }
                }
            }
        }
